@@ -1,0 +1,8 @@
+---
+- name: Master playbook. Provision VM with all software needed by Jenkins jobs.
+  hosts: jenkins-slave
+  gather_facts: true  # Needed for all the "ansible_*" facts that we use.
+  become: true        # Need for installing packages.
+
+  tasks:
+    - shell: echo "I like dogs!" > ~/dogs.txt
