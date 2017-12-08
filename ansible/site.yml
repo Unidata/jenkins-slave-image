@@ -5,4 +5,11 @@
   become: true        # Need for installing packages.
 
   tasks:
-    - shell: echo "I like dogs!" > ~/dogs.txt
+    - name: Update apt cache if needed.
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600  # Update cache if it's been over an hour since the last update.
+
+    - name: Include 'libnetcdf-and-deps' role.
+      include_role: name=libnetcdf-and-deps
+      tags: [ libnetcdf ]

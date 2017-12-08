@@ -1,0 +1,71 @@
+---
+- name: Install 'm4' and 'g++' for configuring and compiling software.
+  package: "name={{ item }} state=latest"
+  with_items: [ 'm4', 'g++' ]
+
+
+- name: Download and unpack zlib.
+  unarchive:
+    src: https://downloads.sourceforge.net/project/libpng/zlib/{{ zlib_version }}/zlib-{{ zlib_version }}.tar.gz
+    dest: "{{ unarchive_dir }}"
+    creates: "{{ zlib_src_dir }}"
+    remote_src: yes
+
+- name: Configure zlib.
+  command: ./configure --prefix={{ install_dir }}
+  args:
+    chdir: "{{ zlib_src_dir }}"
+    creates: "{{ zlib_src_dir }}/configure.log"
+
+- name: Install zlib.
+  command: make install
+  args:
+    chdir: "{{ zlib_src_dir }}"
+    creates: "{{ install_dir }}/lib/libz.so"
+
+
+- name: Download and unpack hdf5.
+  unarchive:
+    src: https://support.hdfgroup.org/ftp/HDF5/current/src/hdf5-{{ hdf5_version }}.tar.gz
+    dest: "{{ unarchive_dir }}"
+    creates: "{{ hdf5_src_dir }}"
+    remote_src: yes
+
+- name: Configure hdf5.
+  command: ./configure --prefix={{ install_dir }} --with-zlib={{ install_dir }}
+  args:
+    chdir: "{{ hdf5_src_dir }}"
+    creates: "{{ hdf5_src_dir }}/config.log"
+
+- name: Install hdf5.
+  command: make install
+  args:
+    chdir: "{{ hdf5_src_dir }}"
+    creates: "{{ install_dir }}/lib/libhdf5.so"
+
+
+- name: Download and unpack netcdf-c.
+  unarchive:
+    src: https://github.com/Unidata/netcdf-c/archive/v{{ netcdf_version }}.tar.gz
+    dest: "{{ unarchive_dir }}"
+    creates: "{{ netcdf_src_dir }}"
+    remote_src: yes
+
+- name: Configure netcdf-c.
+  command: ./configure --prefix={{ install_dir }} --disable-dap --enable-logging
+  args:
+    chdir: "{{ netcdf_src_dir }}"
+    creates: "{{ netcdf_src_dir }}/config.log"
+  environment:
+    CPPFLAGS: -I{{ install_dir }}/include
+    LDFLAGS: -L{{ install_dir }}/lib
+
+- name: Install netcdf-c.
+  command: make install
+  args:
+    chdir: "{{ netcdf_src_dir }}"
+    creates: "{{ install_dir }}/lib/libnetcdf.so"
+
+
+- name: Update the run-time linker cache to include the newly built libraries.
+  command: ldconfig
