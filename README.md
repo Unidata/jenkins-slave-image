@@ -2,7 +2,7 @@
 
 Creates an AMI suitable for use on the Jenkins slave machines.
 
-## Generating libnetcdf 4.5.0 binaries for Travis
+## Generating libnetcdf binaries for Travis
 
 * In `Vagrantfile`, change the value of `config.vm.box` to `"bento/ubuntu-14.04"`, or whatever is appropriate for
 Travis's infrastructure.
@@ -11,7 +11,7 @@ Travis's infrastructure.
     * `vagrant ssh`
     * You should now be logged into the Vagrant guest VM.
 * Create the directory to which we'll copy the shared libraries and symlinks. Note that `/vagrant` is a shared
-directory created automatically by Vagrant. Any file created in that directory on the guest will end up in the
+directory created automatically by Vagrant. Any file created inside it on the guest will end up in the
 `jenkins-slave-image` project directory on the host.
     * `mkdir /vagrant/ubuntu-14.04.5-amd64`
 * Change to the directory where we installed netcdf and its dependencies.

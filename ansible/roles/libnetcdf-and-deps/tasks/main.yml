@@ -52,7 +52,7 @@
     remote_src: yes
 
 - name: Configure netcdf-c.
-  command: ./configure --prefix={{ install_dir }} --disable-dap --enable-logging
+  command: ./configure --prefix={{ install_dir }} --disable-dap --enable-logging --enable-cdf5
   args:
     chdir: "{{ netcdf_src_dir }}"
     creates: "{{ netcdf_src_dir }}/config.log"
