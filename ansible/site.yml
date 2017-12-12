@@ -14,10 +14,14 @@
       include_role: name=volume
       tags: [ volume ]
 
-#    - name: Include 'libnetcdf-and-deps' role.
-#      include_role: name=libnetcdf-and-deps
-#      tags: [ libnetcdf ]
+    - name: Include 'libnetcdf-and-deps' role.
+      include_role: name=libnetcdf-and-deps
+      tags: [ libnetcdf ]
 
     - name: Include 'ansible-oracle-java' role.
       include_role: name=ansible-oracle-java
       tags: [ java ]
+
+    - name: Include 'ansible-role-docker' role.
+      include_role: name=ansible-role-docker
+      tags: [ docker ]
