@@ -25,3 +25,7 @@
     - name: Include 'ansible-role-docker' role.
       include_role: name=ansible-role-docker
       tags: [ docker ]
+
+    - name: Include 'other-software' role.
+      include_role: name=other-software
+      tags: [ other ]

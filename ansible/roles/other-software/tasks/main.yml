@@ -1,0 +1,8 @@
+---
+  # See http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-apt-ubuntu
+- name: Install Ansible PPA.
+  apt_repository: "repo='ppa:ansible/ansible' state=present"
+
+- name: Install Ansible.
+  package: "name={{ item }} state=latest"
+  with_items: [ 'software-properties-common', 'ansible' ]
