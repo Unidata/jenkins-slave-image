@@ -4,3 +4,6 @@
 [submodule "ansible/roles/ansible-role-docker"]
 	path = ansible/roles/ansible-role-docker
 	url = https://github.com/cwardgar/ansible-role-docker.git
+[submodule "ansible/roles/ansible-role-nodejs"]
+	path = ansible/roles/ansible-role-nodejs
+	url = https://github.com/cwardgar/ansible-role-nodejs.git
