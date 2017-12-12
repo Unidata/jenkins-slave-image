@@ -1,7 +1,7 @@
 ---
-- name: Install 'm4' and 'g++' for configuring and compiling software.
+- name: Install build tools.
   package: "name={{ item }} state=latest"
-  with_items: [ 'm4', 'g++' ]
+  with_items: [ 'm4', 'make', 'g++' ]
 
 
 - name: Download and unpack zlib.
