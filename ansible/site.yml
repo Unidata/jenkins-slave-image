@@ -9,6 +9,7 @@
       apt:
         update_cache: yes
         cache_valid_time: 3600  # Update cache if it's been over an hour since the last update.
+      tags: [ always ]
 
     - name: Include 'volume' role.
       include_role: name=volume
@@ -33,3 +34,35 @@
     - name: Include 'other-software' role.
       include_role: name=other-software
       tags: [ other ]
+
+    # When Jenkins master connects to a slave, it runs a non-interactive, non-login shell (see
+    # https://wiki.jenkins.io/display/JENKINS/SSH+Slaves+plugin#SSHSlavesplugin-CommonPitfalls). This means that no
+    # startup scripts are executed whatsoever. However, "/etc/environment" is ALWAYS read and its content is then
+    # added to the environment (see https://help.ubuntu.com/community/EnvironmentVariables#A.2Fetc.2Fenvironment).
+    # Here we define BASH_ENV.
+    #
+    # When Bash is started non-interactively, it looks for the variable BASH_ENV in the environment, expands its value
+    # if it appears there, and uses the expanded value as the name of a script to source (see
+    # https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html#Invoked-non_002dinteractively).
+    # The value of our BASH_ENV is "/etc/set-env.sh".
+    - name: Add "BASH_ENV" to /etc/environment.
+      lineinfile:
+        dest: /etc/environment
+        state: present
+        regexp: '^BASH_ENV'
+        line: 'BASH_ENV=/etc/set-env.sh'
+
+    # Copy our startup script to the location that we specified in BASH_ENV. The script simply sources /etc/profile.
+    # And thus--using a combination of /etc/environment, BASH_ENV, and an auxiliary script--we have added processing
+    # of /etc/profile to our non-interactive, non-login shells. That's critical because we set important environment
+    # variables for Java and Node in /etc/profile.d/ scripts.
+    #
+    # NOTE: For this solution to work, we had to go to the Jenkins System Configuration and set the value of
+    # "Shell executable" to "bash". By default it is "sh" (see https://stackoverflow.com/questions/12455932), and
+    # a non-interactive Bash shell invoked with the name "sh" does not look for BASH_ENV or any other variable
+    # (see https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html#Invoked-with-name-sh).
+    - name: Add set-env script.
+      copy:
+        src: set-env.sh
+        dest: /etc/set-env.sh
+        mode: 0755
