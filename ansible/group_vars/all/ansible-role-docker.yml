@@ -1,3 +1,6 @@
 ---
 docker_package_state: latest
 docker_install_compose: false
+
+docker_group_members:
+  - "{{ ansible_user }}"
