@@ -24,6 +24,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "ansible/site.yml"
     ansible.config_file = "ansible/ansible.cfg"
     ansible.limit = "all"  # Do not limit the hosts here; do it in the playbook instead.
-    ansible.tags = "docker"
+    # ansible.tags = "docker"
   end
 end
