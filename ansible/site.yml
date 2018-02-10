@@ -15,6 +15,10 @@
       include_role: name=volume
       tags: [ volume ]
 
+    - name: Include 'security' role.
+      include_role: name=security
+      tags: [ security ]
+
     - name: Include 'libnetcdf-and-deps' role.
       include_role: name=libnetcdf-and-deps
       tags: [ libnetcdf ]
