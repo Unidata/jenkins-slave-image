@@ -8,5 +8,5 @@ zlib_src_dir: "{{ unarchive_dir }}/zlib-{{ zlib_version }}"
 hdf5_version: 1.10.1
 hdf5_src_dir: "{{ unarchive_dir }}/hdf5-{{ hdf5_version }}"
 
-netcdf_version: 4.5.0
+netcdf_version: 4.6.0
 netcdf_src_dir: "{{ unarchive_dir }}/netcdf-c-{{ netcdf_version }}"

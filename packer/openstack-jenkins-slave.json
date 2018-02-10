@@ -1,0 +1,37 @@
+{
+  "variables": {
+    "ansible_dir": "../ansible",
+    "timestamp": "{{isotime \"2006-01-02T15:04:05Z\"}}"
+  },
+  "builders": [
+    {
+      "type": "openstack",
+      "flavor": "m1.small",
+      "source_image_name": "ubuntu-16.04.3-base-2017-11-17T00:08:31Z",
+      "image_name": "jenkins-slave-{{user `timestamp`}}",
+      "ssh_username": "ubuntu",
+      "networks": [
+        "a180e538-acac-42cc-bdfa-ab93d068af0b"
+      ],
+      "security_groups": [
+        "9c22a40e-ff8a-435a-afcb-41ad3dd44c1f"
+      ],
+      "floating_ip_pool": "public",
+      "user_data_file": "user-data.yml"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "user": "ubuntu",
+      "playbook_file": "{{user `ansible_dir`}}/site.yml",
+      "groups": [ "jenkins-slave" ],
+      "ansible_env_vars": [
+        "ANSIBLE_CONFIG={{user `ansible_dir`}}/ansible.cfg"
+      ],
+      "extra_arguments": [
+        "--verbose"
+      ]
+    }
+  ]
+}

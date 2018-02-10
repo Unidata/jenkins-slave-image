@@ -2,6 +2,17 @@
 
 Creates an AMI suitable for use on the Jenkins slave machines.
 
+## Software installed
+
+1. zlib: 1.2.11
+1. hdf5: 1.10.1
+1. netcdf: 4.6.0
+1. Oracle JRE 1.8.0_161
+1. Docker 17.12.0-ce
+1. Node 6.12.3
+1. retire 1.5.1
+1. ansible 2.4.3.0
+
 ## Generating libnetcdf binaries for Travis
 
 * In `Vagrantfile`, change the value of `config.vm.box` to `"bento/ubuntu-14.04"`, or whatever is appropriate for
