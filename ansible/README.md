@@ -27,7 +27,7 @@ ansible jenkins-slave -i inventories/dev/hosts -v -m service -a 'name=nexus stat
 ```
 ansible-playbook -i inventories/dev/hosts -v site.yml
 ansible-playbook -i inventories/dev/hosts -v site.yml --tags "security"
-ansible-playbook -i inventories/dev/hosts -v site.yml --start-at-task="Create 'wheel' group."
+ansible-playbook -i inventories/dev/hosts -v site.yml --start-at-task="Include 'other-software' role."
 ```
 
 When using the `--start-at-task` and `--tags` options, the included tasks may rely on variables

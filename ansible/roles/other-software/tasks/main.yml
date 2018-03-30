@@ -1,8 +1,8 @@
 ---
-  # See http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-apt-ubuntu
-- name: Install Ansible PPA.
-  apt_repository: "repo='ppa:ansible/ansible' state=present"
-
-- name: Install Ansible.
+- name: Install Python, pip, and dependencies for Ansible.
   package: "name={{ item }} state=latest"
-  with_items: [ 'software-properties-common', 'ansible' ]
+  with_items: [ 'software-properties-common', 'python-software-properties', 'python-pip' ]
+
+- name: Upgrade pip and install 'setuptools', another Ansible dependency.
+  pip: "name={{ item }} state=latest"
+  with_items: [ 'pip', 'setuptools' ]
