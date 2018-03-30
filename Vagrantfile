@@ -16,6 +16,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.memory = 2048
   end
 
+  config.vm.provision :file do |file|
+    file.source = "packer/scripts"
+    file.destination = "/tmp"
+  end
+
+  $script = <<-SCRIPT
+    /tmp/stop-and-remove-daily-apt.sh
+    /tmp/full-upgrade.sh
+    /tmp/cleanup.sh
+  SCRIPT
+
+  config.vm.provision "shell", inline: $script
+
   # Provision VM using the main Ansible playbook.
   config.vm.provision :ansible do |ansible|
     ansible.compatibility_mode = "2.0"

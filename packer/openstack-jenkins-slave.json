@@ -22,6 +22,19 @@
   ],
   "provisioners": [
     {
+      "type": "file",
+      "source": "scripts/",
+      "destination": "/tmp/"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo /tmp/stop-and-remove-daily-apt.sh",
+        "sudo /tmp/full-upgrade.sh",
+        "sudo /tmp/cleanup.sh"
+      ]
+    },
+    {
       "type": "ansible",
       "user": "ubuntu",
       "playbook_file": "{{user `ansible_dir`}}/site.yml",
