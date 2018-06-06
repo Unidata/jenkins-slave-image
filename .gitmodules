@@ -1,9 +1,9 @@
 [submodule "ansible/roles/ansible-oracle-java"]
 	path = ansible/roles/ansible-oracle-java
-	url = https://github.com/cwardgar/ansible-oracle-java.git
+	url = https://github.com/William-Yeh/ansible-oracle-java.git
 [submodule "ansible/roles/ansible-role-docker"]
 	path = ansible/roles/ansible-role-docker
-	url = https://github.com/cwardgar/ansible-role-docker.git
+	url = https://github.com/Unidata/ansible-role-docker.git
 [submodule "ansible/roles/ansible-role-nodejs"]
 	path = ansible/roles/ansible-role-nodejs
-	url = https://github.com/cwardgar/ansible-role-nodejs.git
+	url = https://github.com/Unidata/ansible-role-nodejs.git
