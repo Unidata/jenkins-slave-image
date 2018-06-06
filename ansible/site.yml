@@ -23,8 +23,8 @@
       include_role: name=libnetcdf-and-deps
       tags: [ libnetcdf ]
 
-    - name: Include 'ansible-oracle-java' role.
-      include_role: name=ansible-oracle-java
+    - name: Include 'oracle-java' role.
+      include_role: name=oracle-java
       tags: [ java ]
 
     - name: Include 'ansible-role-docker' role.

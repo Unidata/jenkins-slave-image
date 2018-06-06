@@ -4,3 +4,6 @@
 [submodule "ansible/roles/ansible-role-nodejs"]
 	path = ansible/roles/ansible-role-nodejs
 	url = https://github.com/Unidata/ansible-role-nodejs.git
+[submodule "ansible/roles/oracle-java"]
+	path = ansible/roles/oracle-java
+	url = https://github.com/Unidata/oracle-java.git

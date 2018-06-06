@@ -7,10 +7,10 @@ Creates an AMI suitable for use on the Jenkins slave machines.
 1. zlib: 1.2.11
 1. hdf5: 1.10.1
 1. netcdf: 4.6.1
-1. Oracle JRE 1.8.0_161
-1. Docker 17.12.0-ce
-1. Node 6.12.3
-1. retire 1.5.1
+1. Oracle JRE 1.8.0_171
+1. Docker 18.03.1-ce
+1. Node v6.14.2
+1. retire 1.6.0
 
 ## Generating libnetcdf binaries for Travis
 
